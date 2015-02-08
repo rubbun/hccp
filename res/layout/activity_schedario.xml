@@ -1,0 +1,176 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".MyActivity"
+    android:background="@drawable/gradient">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:weightSum="1" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="140dp"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="-15dp"
+            android:layout_weight="0.05"
+            android:orientation="horizontal"
+            android:paddingTop="10dp" >
+
+            <ImageView
+                android:id="@+id/materie"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_gravity="bottom"
+                android:layout_weight="0.08"
+                android:src="@drawable/materie"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/fornitori"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="0.08"
+                android:src="@drawable/fornitori"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/pulizia"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="0.08"
+                android:src="@drawable/pulizia"
+                android:textStyle="bold" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="140dp"
+            android:layout_marginTop="-12dp"
+            android:layout_weight="0.15"
+            android:orientation="horizontal"
+            android:paddingTop="10dp" >
+
+            <ImageView
+                android:id="@+id/frigoriferi"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_gravity="bottom"
+                android:layout_weight="0.08"
+                android:src="@drawable/frigoriferi"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/congelatori"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="0.08"
+                android:src="@drawable/congelatori"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/animali"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="0.08"
+                android:src="@drawable/animali"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="140dp"
+            android:layout_marginTop="-12dp"
+            android:layout_weight="0.15"
+            android:orientation="horizontal"
+            android:paddingTop="10dp" >
+
+            <ImageView
+                android:id="@+id/conformita"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_gravity="bottom"
+                android:layout_weight="0.08"
+                android:src="@drawable/conformita"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/manutenzione"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="0.08"
+                android:src="@drawable/manutenzione"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/laboratorio"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="0.08"
+                android:src="@drawable/laboratorio"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="140dp"
+            android:layout_marginTop="-12dp"
+            android:layout_weight="0.15"
+            android:orientation="horizontal"
+            android:paddingTop="10dp" >
+
+            <ImageView
+                android:id="@+id/autorita"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_gravity="bottom"
+                android:layout_weight="0.08"
+                android:src="@drawable/autorita"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/consumatori"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="0.08"
+                android:src="@drawable/consumatori"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/ceck"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="0.08"
+                android:src="@drawable/ceck"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
