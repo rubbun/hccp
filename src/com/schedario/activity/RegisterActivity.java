@@ -16,7 +16,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.schedario.constants.Constants;
-import com.schedario.network.HttpClient;
+import com.schedario.network.KlHttpClient;
 
 public class RegisterActivity extends BaseActivity implements OnClickListener {
 	private EditText et_company, et_address, et_city, et_zipcode, et_name;
@@ -90,7 +90,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 				req.put("username", username);
 				req.put("password", password);
 
-				String response = HttpClient.SendHttpPost(Constants.SIGNUP, req.toString());
+				String response = KlHttpClient.SendHttpPost(Constants.SIGNUP, req.toString());
 				if (response != null) {
 					try {
 						JSONObject ob = new JSONObject(response);

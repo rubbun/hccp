@@ -4,7 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_gravity="fill_horizontal"
-    android:background="@color/main_bg"
+    android:background="@drawable/gradient"
     android:orientation="vertical"
     tools:ignore="UselessParent,DisableBaselineAlignment,ScrollViewSize,ButtonStyle,HardcodedText,RtlHardcoded,TextFields,RtlSymmetry,TooManyViews" >
 
@@ -14,7 +14,7 @@
         android:layout_height="45dp"
         android:gravity="center"
         android:text="@string/registration"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -68,7 +68,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Company Name: "
-                                android:textColor="#000000"
+                                 android:textColor="#FFFFFF"
                                 android:textSize="16sp" />
                         </LinearLayout>
 
@@ -129,7 +129,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Legal Address: "
-                                android:textColor="#000000"
+                                android:textColor="#FFFFFF"
                                 android:textSize="16sp" />
                         </LinearLayout>
 
@@ -181,7 +181,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="City: "
-                                    android:textColor="#000000"
+                                    android:textColor="#FFFFFF"
                                     android:textSize="16sp" />
                             </LinearLayout>
 
@@ -230,7 +230,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Zip: "
-                                android:textColor="#000000"
+                                 android:textColor="#FFFFFF"
                                 android:textSize="16sp" />
                         </LinearLayout>
 
@@ -277,7 +277,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Your Name: "
-                                android:textColor="#000000"
+                                android:textColor="#FFFFFF"
                                 android:textSize="16sp"
                                 tools:ignore="HardcodedText" />
                         </LinearLayout>
@@ -325,7 +325,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Surname: "
-                                android:textColor="#000000"
+                                android:textColor="#FFFFFF"
                                 android:textSize="16sp" />
                         </LinearLayout>
 
@@ -372,7 +372,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Province: "
-                                android:textColor="#000000"
+                               android:textColor="#FFFFFF"
                                 android:textSize="16sp" />
                         </LinearLayout>
 
@@ -419,7 +419,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Post Code: "
-                                android:textColor="#000000"
+                                 android:textColor="#FFFFFF"
                                 android:textSize="16sp" />
                         </LinearLayout>
 
@@ -466,7 +466,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Phone: "
-                                android:textColor="#000000"
+                                 android:textColor="#FFFFFF"
                                 android:textSize="16sp" />
                         </LinearLayout>
 
@@ -514,7 +514,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="DOB: "
-                                android:textColor="#000000"
+                                 android:textColor="#FFFFFF"
                                 android:textSize="16sp" />
                         </LinearLayout>
 
@@ -562,7 +562,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Indirizzo email: "
-                                android:textColor="#000000"
+                                android:textColor="#FFFFFF"
                                 android:textSize="16sp" />
                         </LinearLayout>
 
@@ -623,7 +623,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Username: "
-                                android:textColor="#000000"
+                                android:textColor="#FFFFFF"
                                 android:textSize="16sp" />
                         </LinearLayout>
 
@@ -670,7 +670,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Password: "
-                                android:textColor="#000000"
+                                 android:textColor="#FFFFFF"
                                 android:textSize="16sp" />
                         </LinearLayout>
 

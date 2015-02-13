@@ -2,7 +2,20 @@ package com.schedario.utils;
 
 public class UserInfo {
 
-	private String user_id,company_name,address,city,zip_code,name,surname,province,post_code,phone,dob,email,username,password = null;
+	public String user_id;
+	public String company_name;
+	public String address;
+	public String city;
+	public String zip_code;
+	public String name;
+	public String surname;
+	public String province;
+	public String post_code;
+	public String phone;
+	public String dob;
+	public String email;
+	public String username;
+	public String password = null;
 
 	public UserInfo(String user_id,String company_name, String address, String city,
 			String zip_code, String name, String surname, String province,

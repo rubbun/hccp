@@ -1,34 +1,49 @@
 package com.schedario.activity;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
-public class Schedario extends Activity {
+public class Schedario extends BaseActivity {
+	
+	private Intent mIntent;
+	private ImageView iv_materie,iv_maintenance,iv_supplier;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_schedario);
+		
+		iv_materie = (ImageView)findViewById(R.id.iv_materie);
+		iv_materie.setOnClickListener(this);
+		
+		iv_maintenance = (ImageView)findViewById(R.id.iv_maintenance);
+		iv_maintenance.setOnClickListener(this);
+		
+		iv_supplier = (ImageView)findViewById(R.id.iv_supplier);
+		iv_supplier.setOnClickListener(this);
 	}
-
+	
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.login, menu);
-		return true;
-	}
+	public void onClick(View v) {
+		super.onClick(v);
+		switch (v.getId()) {
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
+		case R.id.iv_materie:
+			mIntent = new Intent(Schedario.this,MaterieActivity.class);
+			startActivity(mIntent);
+			break;
+			
+		case R.id.iv_maintenance:
+			mIntent = new Intent(Schedario.this,MaintenanceActivity.class);
+			startActivity(mIntent);
+			break;
+			
+		case R.id.iv_supplier:
+			mIntent = new Intent(Schedario.this,SupplierListActivity.class);
+			startActivity(mIntent);
+			break;
 		}
-		return super.onOptionsItemSelected(item);
 	}
 }

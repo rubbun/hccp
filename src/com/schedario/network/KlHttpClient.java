@@ -15,10 +15,10 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.util.Log;
 
-public class HttpClient {
+public class KlHttpClient {
 
 	public synchronized static String SendHttpPost(String url, String data) {
-		System.out.println("!-- link=>"+url+"?json="+data);
+		System.out.println("!!-- link=>"+url+"?json="+data);
 		String return_str = null;
 		try {
 			DefaultHttpClient httpclient = new DefaultHttpClient();
@@ -46,7 +46,7 @@ public class HttpClient {
 		catch (Exception e){
 			e.printStackTrace();
 		}
-		System.out.println("!-- response exception=>"+return_str);
+		System.out.println("!!-- response exception=>"+return_str);
 		return return_str;
 	}
 

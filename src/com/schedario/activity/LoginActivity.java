@@ -13,7 +13,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.schedario.constants.Constants;
-import com.schedario.network.HttpClient;
+import com.schedario.network.KlHttpClient;
 import com.schedario.utils.UserInfo;
 
 public class LoginActivity extends BaseActivity {
@@ -38,8 +38,6 @@ public class LoginActivity extends BaseActivity {
 
 		cb_remember = (CheckBox) findViewById(R.id.cb_remember);
 	}
-
-	
 
 	private boolean isValid() {
 		String username = et_username.getText().toString();
@@ -91,7 +89,7 @@ public class LoginActivity extends BaseActivity {
 				JSONObject req = new JSONObject();
 				req.put("username", username);
 				req.put("password", password);
-				String response = HttpClient.SendHttpPost(Constants.SIGNIN, req.toString());
+				String response = KlHttpClient.SendHttpPost(Constants.SIGNIN, req.toString());
 				if (response != null) {
 					JSONObject ob = new JSONObject(response);
 					if (ob.getBoolean("status")) {
