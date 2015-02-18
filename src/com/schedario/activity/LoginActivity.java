@@ -21,7 +21,6 @@ public class LoginActivity extends BaseActivity {
 	private EditText et_username, et_password;
 	private Button btn_login, btn_register;
 	private CheckBox cb_remember;
-	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -109,9 +108,9 @@ public class LoginActivity extends BaseActivity {
 						String uname = ob.getString("username");
 						String passwrd = ob.getString("password");
 
-						app.setUserinfo(new UserInfo(user_id, company, address, city, zipcode, name, surname, province, postcode, phone, dob, email, uname, passwrd));
+						app.getUserinfo().setUserInfo(user_id, company, address, city, zipcode, name, surname, province, postcode, phone, dob, email, uname, passwrd);
 
-						app.getLogininfo().setLoginInfo(username, password);
+						app.getLogininfo().setLoginInfo(username, password,true);
 						return ob.getBoolean("status");
 					}
 				}

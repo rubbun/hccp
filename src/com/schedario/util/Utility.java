@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +17,7 @@ import com.schedario.activity.R;
 
 public class Utility {
 	
-	
+	public static String PREFERENCE_STORAGE = "SchedarioHCCPPreference";
 	public static final String [] sender= new String [] {"Lalit", "RobinHood", "Captain", "HotVerySpicy", "Dharmendra", "PareshMayani", "Abhi", "SpK", "CapDroid"};
 	public static final String [] messages= new String [] {
 		"Aah! thats cool",
@@ -63,5 +65,33 @@ public class Utility {
 	        }
 	        catch(Exception ex){}
 	    }
-	
+	 /**
+		 * Purpose: Store the value on preference based
+		 * 
+		 * @param ctx
+		 * @param key
+		 * @param value
+		 */
+		public static void storeValueOnPersistence(Context ctx, String key, String value) {
+			SharedPreferences.Editor editor = ctx.getSharedPreferences(PREFERENCE_STORAGE, Activity.MODE_PRIVATE).edit();
+			editor.putString(key, value);
+			editor.commit();
+		}
+		
+		/**
+		* Purpose: Get value of supplied key from shared preference
+		* 
+		* @param ctx
+		* @param key
+		* @return
+		*/
+		public static String getValueFromPersistence(Context ctx, String key) {
+			String result = "NA";
+			SharedPreferences userPreferences = ctx.getSharedPreferences(PREFERENCE_STORAGE, Activity.MODE_PRIVATE);
+			if (userPreferences.contains(key)) {
+				result = userPreferences.getString(key, "NA");
+			}
+			return result; 
+			
+		}
 }

@@ -1,27 +1,53 @@
 package com.schedario.utils;
 
+import com.schedario.constants.Constants;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+
 public class UserInfo {
 
-	public String user_id;
-	public String company_name;
-	public String address;
-	public String city;
-	public String zip_code;
-	public String name;
-	public String surname;
+	public String user_id = null;
+	public String company_name = null;
+	public String address = null;
+	public String city = null;
+	public String zip_code = null;
+	public String name = null;
+	public String surname = null;
 	public String province;
-	public String post_code;
-	public String phone;
-	public String dob;
-	public String email;
-	public String username;
+	public String post_code = null;
+	public String phone = null;
+	public String dob = null;
+	public String email = null;
+	public String username = null;
 	public String password = null;
+	public SharedPreferences pref;
+	
+	public UserInfo(Context context){
+		pref = context.getSharedPreferences(Constants.values.USERINFO.name(), Context.MODE_PRIVATE);
+		user_id = pref.getString(Constants.values.USERID.name(), null);
+		company_name = pref.getString(Constants.values.COMPANYNAME.name(), null);
+		address = pref.getString(Constants.values.ADDRESS.name(), null);
+		city = pref.getString(Constants.values.CITY.name(), null);
+		
+		zip_code = pref.getString(Constants.values.ZIPCODE.name(), null);
+		name = pref.getString(Constants.values.NAME.name(), null);
+		surname = pref.getString(Constants.values.SURNAME.name(), null);
+		province = pref.getString(Constants.values.PROVINCE.name(), null);
+		
+		post_code = pref.getString(Constants.values.POSTCODE.name(), null);
+		phone = pref.getString(Constants.values.PHONE.name(), null);
+		dob = pref.getString(Constants.values.DOB.name(), null);
+		email = pref.getString(Constants.values.EMAIL.name(), null);
+		
+	}
 
-	public UserInfo(String user_id,String company_name, String address, String city,
+	public void setUserInfo(String user_id,String company_name, String address, String city,
 			String zip_code, String name, String surname, String province,
 			String post_code, String phone, String dob, String email,
 			String username, String password) {
-		super();
+		
 		this.user_id = user_id;
 		this.company_name = company_name;
 		this.address = address;
@@ -34,119 +60,73 @@ public class UserInfo {
 		this.phone = phone;
 		this.dob = dob;
 		this.email = email;
-		this.username = username;
-		this.password = password;
+		
+		Editor edit = pref.edit();
+		edit.putString(Constants.values.USERID.name(), user_id);
+		edit.putString(Constants.values.COMPANYNAME.name(), company_name);
+		edit.putString(Constants.values.ADDRESS.name(), address);
+		edit.putString(Constants.values.CITY.name(), city);
+		
+		edit.putString(Constants.values.ZIPCODE.name(), zip_code);
+		edit.putString(Constants.values.NAME.name(), name);
+		edit.putString(Constants.values.SURNAME.name(), surname);
+		edit.putString(Constants.values.PROVINCE.name(), province);
+		
+		edit.putString(Constants.values.POSTCODE.name(), post_code);
+		edit.putString(Constants.values.PHONE.name(), phone);
+		edit.putString(Constants.values.DOB.name(), dob);
+		edit.putString(Constants.values.EMAIL.name(), email);
+		
+		edit.commit();
+		
+		edit.commit();
 	}
 
 	public String getUser_id() {
-		return user_id;
-	}
-
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+		return pref.getString(Constants.values.USERID.name(), null);
 	}
 
 	public String getCompany_name() {
-		return company_name;
-	}
-
-	public void setCompany_name(String company_name) {
-		this.company_name = company_name;
+		return pref.getString(Constants.values.COMPANYNAME.name(), null);
 	}
 
 	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
+		return pref.getString(Constants.values.ADDRESS.name(), null);
 	}
 
 	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
+		return pref.getString(Constants.values.CITY.name(), null);
 	}
 
 	public String getZip_code() {
-		return zip_code;
-	}
-
-	public void setZip_code(String zip_code) {
-		this.zip_code = zip_code;
+		return pref.getString(Constants.values.ZIPCODE.name(), null);
 	}
 
 	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
+		return pref.getString(Constants.values.NAME.name(), null);
 	}
 
 	public String getSurname() {
-		return surname;
+		return pref.getString(Constants.values.SURNAME.name(), null);
 	}
-
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
-
+	
 	public String getProvince() {
-		return province;
-	}
-
-	public void setProvince(String province) {
-		this.province = province;
+		return pref.getString(Constants.values.PROVINCE.name(), null);
 	}
 
 	public String getPost_code() {
-		return post_code;
-	}
-
-	public void setPost_code(String post_code) {
-		this.post_code = post_code;
+		return pref.getString(Constants.values.PROVINCE.name(), null);
 	}
 
 	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
+		return pref.getString(Constants.values.PHONE.name(), null);
 	}
 
 	public String getDob() {
-		return dob;
-	}
-
-	public void setDob(String dob) {
-		this.dob = dob;
+		return pref.getString(Constants.values.DOB.name(), null);
 	}
 
 	public String getEmail() {
-		return email;
+		return pref.getString(Constants.values.EMAIL.name(), null);
 	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	} 
 }

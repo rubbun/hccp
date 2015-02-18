@@ -25,6 +25,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -198,7 +199,7 @@ public class MaterieActivity extends BaseActivity{
 				MultipartEntity entity = new MultipartEntity(
 						HttpMultipartMode.BROWSER_COMPATIBLE);
 				entity.addPart("id", new StringBody(
-						app.getUserinfo().user_id));
+						app.getUserinfo().getUser_id()));
 				entity.addPart("img", new FileBody(selectedImagePath));
 				httpPost.setEntity(entity);
 				System.out.println("!!Request  " + httpPost.getRequestLine());
@@ -232,6 +233,9 @@ public class MaterieActivity extends BaseActivity{
 					if (json.getBoolean("status")) {
 						Toast.makeText(getApplicationContext(), "Image uploaded successfully",
 								Toast.LENGTH_LONG).show();
+						displayView(1);
+						iv_save_photo.setImageBitmap(null);
+						selectedImagePath = null;
 					}
 				} catch (JSONException e) {
 					e.printStackTrace();
@@ -297,7 +301,7 @@ public class MaterieActivity extends BaseActivity{
 
 			try {
 				JSONObject req = new JSONObject();
-				req.put("id", app.getUserinfo().user_id);
+				req.put("id", app.getUserinfo().getUser_id());
 				String response = KlHttpClient.SendHttpPost(Constants.GALLERY, req.toString());
 				if (response != null) {
 					JSONObject ob = new JSONObject(response);

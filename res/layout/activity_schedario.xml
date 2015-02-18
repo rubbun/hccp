@@ -67,7 +67,7 @@
             android:paddingTop="10dp" >
 
             <ImageView
-                android:id="@+id/frigoriferi"
+                android:id="@+id/iv_frigoriferi"
                 android:layout_width="140dp"
                 android:layout_height="140dp"
                 android:layout_gravity="bottom"
@@ -76,7 +76,7 @@
                 android:textStyle="bold" />
 
             <ImageView
-                android:id="@+id/congelatori"
+                android:id="@+id/iv_congelatori"
                 android:layout_width="140dp"
                 android:layout_height="140dp"
                 android:layout_gravity="bottom"
@@ -124,7 +124,7 @@
                 android:textStyle="bold" />
 
             <ImageView
-                android:id="@+id/laboratorio"
+                android:id="@+id/iv_laboratorio"
                 android:layout_width="140dp"
                 android:layout_height="140dp"
                 android:layout_gravity="bottom"
@@ -143,7 +143,7 @@
             android:paddingTop="10dp" >
 
             <ImageView
-                android:id="@+id/autorita"
+                android:id="@+id/iv_autorita"
                 android:layout_width="140dp"
                 android:layout_height="140dp"
                 android:layout_gravity="bottom"

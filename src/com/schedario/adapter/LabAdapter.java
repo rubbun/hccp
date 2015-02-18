@@ -7,20 +7,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.schedario.activity.BaseActivity;
 import com.schedario.activity.R;
-import com.schedario.bean.SupplierBean;
+import com.schedario.bean.LabBean;
 import com.schedario.util.ImageLoader;
 
-public class SupplierAdapter extends ArrayAdapter<SupplierBean>{
+public class LabAdapter extends ArrayAdapter<LabBean>{
 	
 	private BaseActivity activity;
 	private ViewHolder mHolder;
 	public ImageLoader imageLoader;
-	public ArrayList<SupplierBean> item = new ArrayList<SupplierBean>();
+	public ArrayList<LabBean> item = new ArrayList<LabBean>();
 	public String date,doctor_id;
 	public boolean isClicked = false;
 	
@@ -30,7 +29,7 @@ public class SupplierAdapter extends ArrayAdapter<SupplierBean>{
 		public void loadHomeFragment();
 	}
 	
-	public SupplierAdapter(BaseActivity activity,int textViewResourceId,ArrayList<SupplierBean> items) {
+	public LabAdapter(BaseActivity activity,int textViewResourceId,ArrayList<LabBean> items) {
 		super(activity,textViewResourceId, items);
 		this.item = items;
 		this.activity = activity;
@@ -51,40 +50,34 @@ public class SupplierAdapter extends ArrayAdapter<SupplierBean>{
 		View v = convertView;
 		if (v == null) {
 			LayoutInflater vi = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			v = vi.inflate(R.layout.supplierlist_row, null);
+			v = vi.inflate(R.layout.lab_row, null);
 
 			mHolder = new ViewHolder();
 			v.setTag(mHolder);
-		
-			mHolder.tv_product_info = (TextView)v.findViewById(R.id.tv_product_info);
-			mHolder.tv_supplier_info = (TextView)v.findViewById(R.id.tv_supplier_info);
-			mHolder.tv_phone_info = (TextView)v.findViewById(R.id.tv_phone_info);
-			mHolder.tv_contact_info = (TextView)v.findViewById(R.id.tv_contact_info);
-			mHolder.tv_address_info = (TextView)v.findViewById(R.id.tv_address_info);
+			
+			mHolder.tv_date = (TextView)v.findViewById(R.id.tv_date);
+			mHolder.tv_sample = (TextView)v.findViewById(R.id.tv_sample);
+			mHolder.tv_result = (TextView)v.findViewById(R.id.tv_result);
+			mHolder.tv_name = (TextView)v.findViewById(R.id.tv_name);
 			
 		}
 		else {
 			mHolder =  (ViewHolder) v.getTag();
 		}			
 		
-		final SupplierBean mVendor = item.get(position);
+		final LabBean mVendor = item.get(position);
 
 		if(mVendor != null){
 
-			mHolder.tv_product_info.setText(mVendor.getProduct());
-			mHolder.tv_supplier_info.setText(mVendor.getSupplier());
-			mHolder.tv_phone_info.setText(mVendor.getPhone());
-			mHolder.tv_contact_info.setText(mVendor.getContact_person());
-			mHolder.tv_address_info.setText(mVendor.getAddress());
-			
+			mHolder.tv_date.setText(mVendor.getAdded_date());
+			mHolder.tv_sample.setText(mVendor.getSample());
+			mHolder.tv_result.setText(mVendor.getResult());
+			mHolder.tv_name.setText(mVendor.getResponsible_food_safety());
 		}		
 		return v;
 	}
 
 	class ViewHolder {
-		public TextView tv_product_info,tv_supplier_info,tv_phone_info,tv_contact_info,tv_address_info;
-		public Button btn_edit;
+		public TextView tv_date,tv_sample,tv_result,tv_name;
 	}
-	
-	
 }

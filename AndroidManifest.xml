@@ -11,6 +11,11 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" >
+    </uses-permission>
 
     <application
         android:name="com.schedario.utils.Appsettings"
@@ -69,6 +74,49 @@
             android:name=".SupplierListActivity"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name=".RefregeratorListActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".AuthorityActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".FreezeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".LaboratoryActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".UserdataInfoActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.schedario.activity.PulicyActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.schedario.activity.AnimalActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <receiver
+            android:name="com.schedario.util.SampleAlarmReceiver"
+            android:process=":remote" >
+        </receiver>
+        <receiver
+            android:name="com.schedario.util.SampleBootReceiver"
+            android:enabled="false" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" >
+                </action>
+            </intent-filter>
+        </receiver>
+
+        <service android:name="com.schedario.util.SampleSchedulingService" />
     </application>
 
 </manifest>

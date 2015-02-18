@@ -12,7 +12,21 @@ public class SplashActivity extends BaseActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
+	}
+	
+	@Override
+	protected void onStart() {
+		super.onStart();
+		if(app.getLogininfo().getLoginStatus()){
+			Intent i = new Intent(SplashActivity.this,Schedario.class);
+			startActivity(i);
+			finish();
+		}
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
 		new Handler().postDelayed(new Runnable() {
 			@Override
 			public void run() {

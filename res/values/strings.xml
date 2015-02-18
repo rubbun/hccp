@@ -13,5 +13,11 @@
     <string name="Login">Login</string>
     <string name="Back">Back</string>
     <string name="reg_here"><u>Register here</u></string>
+    <string name="select_entry_option">Select Refregerator</string>
+    
+     <string-array name="recharge_history_array">
+        <item>Conforme</item>
+        <item>Non Conforme</item>
+    </string-array>
 
 </resources>

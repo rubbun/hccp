@@ -1,6 +1,5 @@
 package com.schedario.activity;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -13,6 +12,7 @@ import android.widget.EditText;
 import com.schedario.util.ImageLoader;
 import com.schedario.utils.Appsettings;
 import com.schedario.utils.LoginInfo;
+import com.schedario.utils.UserInfo;
 
 public class BaseActivity extends FragmentActivity implements OnClickListener {
 
@@ -28,7 +28,7 @@ public class BaseActivity extends FragmentActivity implements OnClickListener {
 		if (!app.init) {
 			app.init = true;
 			app.setLogininfo(new LoginInfo(this));
-
+			app.setUserinfo(new UserInfo(this));
 		}
 	}
 

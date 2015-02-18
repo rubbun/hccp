@@ -6,14 +6,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.schedario.activity.MaintenanceActivity.GalleryAsynctask;
-import com.schedario.activity.RegisterActivity.CallServerForRegistration;
-import com.schedario.adapter.GalleryAdapter;
-import com.schedario.adapter.SupplierAdapter;
-import com.schedario.bean.SupplierBean;
-import com.schedario.constants.Constants;
-import com.schedario.network.KlHttpClient;
-
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +15,11 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.schedario.adapter.SupplierAdapter;
+import com.schedario.bean.SupplierBean;
+import com.schedario.constants.Constants;
+import com.schedario.network.KlHttpClient;
 
 public class SupplierListActivity extends BaseActivity {
 	
@@ -144,6 +141,7 @@ public class SupplierListActivity extends BaseActivity {
 		protected String doInBackground(Void... params) {
 			try {
 				JSONObject req = new JSONObject();
+				req.put("user_id", app.getUserinfo().getUser_id());
 				req.put("product", product);
 				req.put("supplier", supplier);
 				req.put("phone", phone);
@@ -179,6 +177,8 @@ public class SupplierListActivity extends BaseActivity {
 			et_phone.setText("");
 			et_contact_person.setText("");
 			et_address.setText("");
+			
+			displayView(1);
 		}
 	}
 	
@@ -195,7 +195,7 @@ public class SupplierListActivity extends BaseActivity {
 
 			try {
 				JSONObject req = new JSONObject();
-				req.put("id", app.getUserinfo().user_id);
+				req.put("user_id", app.getUserinfo().getUser_id());
 				String response = KlHttpClient.SendHttpPost(Constants.SHOW_SUPPLIER, req.toString());
 				if (response != null) {
 					JSONObject ob = new JSONObject(response);
@@ -205,7 +205,7 @@ public class SupplierListActivity extends BaseActivity {
 						list.clear();
 						for(int i=0; i<jArr.length(); i++){
 							JSONObject job = jArr.getJSONObject(i);
-							list.add(new SupplierBean(job.getString("id"),
+							list.add(new SupplierBean(job.getString("user_id"),
 									job.getString("product"),
 									job.getString("supplier"),
 									job.getString("phone"),
