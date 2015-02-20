@@ -22,18 +22,19 @@ import android.widget.LinearLayout;
 import com.schedario.activity.BaseActivity;
 import com.schedario.activity.R;
 import com.schedario.activity.ShowImage;
-import com.schedario.bean.FirstImageBean;
+import com.schedario.bean.SecondImageBean;
 import com.schedario.constants.Constants;
 import com.schedario.network.KlHttpClient;
 
-public class GalleryAdapter extends ArrayAdapter<FirstImageBean>{
-	
+public class MaintanenceGalleryAdapter extends ArrayAdapter<SecondImageBean> {
+
 	private BaseActivity activity;
 	private ViewHolder mHolder;
 	int pos= -1;
-	public ArrayList<FirstImageBean> item = new ArrayList<FirstImageBean>();
-	
-	public GalleryAdapter(BaseActivity activity, int textViewResourceId, ArrayList<FirstImageBean> items) {
+	public ArrayList<SecondImageBean> item = new ArrayList<SecondImageBean>();
+
+	public MaintanenceGalleryAdapter(BaseActivity activity,
+			int textViewResourceId, ArrayList<SecondImageBean> items) {
 		super(activity, textViewResourceId, items);
 		this.item = items;
 		this.activity = activity;
@@ -52,34 +53,22 @@ public class GalleryAdapter extends ArrayAdapter<FirstImageBean>{
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		View v = convertView;
-		pos = position;
 		if (v == null) {
-			LayoutInflater vi = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			LayoutInflater vi = (LayoutInflater) activity
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			v = vi.inflate(R.layout.row_gallery, null);
 			mHolder = new ViewHolder();
 			v.setTag(mHolder);
 
 			mHolder.imageView1 = (ImageView) v.findViewById(R.id.imageView1);
 			mHolder.ll_container = (LinearLayout)v.findViewById(R.id.ll_container);
-			
+
 		} else {
 			mHolder = (ViewHolder) v.getTag();
 		}
 
-		activity.imageLoader.DisplayImage(Constants.IMAGE+item.get(position).getImage_name(), mHolder.imageView1);
-		
-		System.out.println("!!path:"+Constants.IMAGE+item.get(position));
-		
-		mHolder.imageView1.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Intent i = new Intent(activity,ShowImage.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				i.putExtra("imagepath", item.get(position).getImage_name());
-				i.putExtra("type", "first");
-				activity.startActivity(i);
-			}
-		});
+		activity.imageLoader.DisplayImage(Constants.IMAGE_SECOND
+				+ item.get(position).getImage_name(), mHolder.imageView1);
 		
 		mHolder.ll_container.setOnClickListener(new OnClickListener() {
 			
@@ -89,16 +78,15 @@ public class GalleryAdapter extends ArrayAdapter<FirstImageBean>{
 				
 			}
 		});
-		
+
 		mHolder.imageView1.setOnLongClickListener(new OnLongClickListener() {
-			
+
 			@Override
 			public boolean onLongClick(View v) {
+
 				
-				System.out.println("!! i am enter here");
-				
-				AlertDialog.Builder alert = new AlertDialog.Builder(
-						activity);
+
+				AlertDialog.Builder alert = new AlertDialog.Builder(activity);
 				alert.setMessage("Are you sure, you want to delete?");
 				alert.setPositiveButton("YES",
 						new DialogInterface.OnClickListener() {
@@ -108,7 +96,7 @@ public class GalleryAdapter extends ArrayAdapter<FirstImageBean>{
 									int which) {
 								dialog.dismiss();
 
-								new AsyncDeleteImage().execute(""+item.get(position).getId());
+								new AsyncDeleteSecondImage().execute(""+item.get(position).getId());
 								item.remove(position);
 								notifyDataSetChanged();
 							}
@@ -128,7 +116,19 @@ public class GalleryAdapter extends ArrayAdapter<FirstImageBean>{
 				return false;
 			}
 		});
-		
+
+		mHolder.imageView1.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(activity, ShowImage.class)
+						.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				i.putExtra("imagepath", item.get(position).getImage_name());
+				i.putExtra("type", "second");
+				activity.startActivity(i);
+			}
+		});
+
 		return v;
 	}
 
@@ -137,7 +137,7 @@ public class GalleryAdapter extends ArrayAdapter<FirstImageBean>{
 		public LinearLayout ll_container;
 	}
 	
-	public class AsyncDeleteImage extends AsyncTask<String, Void, String>{
+	public class AsyncDeleteSecondImage extends AsyncTask<String, Void, String>{
 
 		@Override
 		protected void onPreExecute() {
@@ -149,10 +149,10 @@ public class GalleryAdapter extends ArrayAdapter<FirstImageBean>{
 		protected String doInBackground(String... params) {
 			JSONObject req = new JSONObject();
 			try {
-				int val = Integer.parseInt(params[0]);
+				int val1 = Integer.parseInt(params[0]);
 				req.put("user_id", activity.app.getUserinfo().getUser_id());
 				req.put("id", params[0]);
-				String respponse = KlHttpClient.SendHttpPost(Constants.DELETE_IMAGE, req.toString());
+				String respponse = KlHttpClient.SendHttpPost(Constants.DELETE_IMAGE_SECOND, req.toString());
 				if(respponse != null){
 					JSONObject ob = new JSONObject(respponse);
 					if(ob.getBoolean("status")){

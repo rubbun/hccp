@@ -87,8 +87,8 @@ public class GalleryFragment extends Fragment{
 			super.onPostExecute(result);
 			base.doRemoveLoading();
 			if(result!=null){
-				adapter = new GalleryAdapter(base, R.layout.row_gallery, result);
-				gridView.setAdapter(adapter);
+				/*adapter = new GalleryAdapter(base, R.layout.row_gallery, result);
+				gridView.setAdapter(adapter);*/
 			}
 		}
 	}

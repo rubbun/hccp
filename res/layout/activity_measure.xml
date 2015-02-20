@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/gradient"
+    android:orientation="vertical"
+    android:weightSum="1" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="0.13"
+        android:background="@xml/gradient_header"
+        android:orientation="horizontal"
+        android:weightSum="1" >
+
+        <LinearLayout
+            android:id="@+id/ll_add_measure_data"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.50"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Add Measure "
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.50"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:layout_width="1dp"
+                android:layout_height="fill_parent"
+                android:background="#b9bdc2"
+                android:orientation="vertical" >
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/measure_data_list"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|center"
+                    android:gravity="center"
+                    android:text="Measure List"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.87"
+        android:orientation="vertical"
+        android:padding="5dp" >
+
+        <LinearLayout
+            android:id="@+id/ll_include_add_measure_data"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:visibility="visible" >
+
+            <include
+                layout="@layout/add_measure_data"
+                android:visibility="visible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_include_measuredata_list"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:visibility="gone" >
+
+            <include
+                layout="@layout/measurelist"
+                android:visibility="visible" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

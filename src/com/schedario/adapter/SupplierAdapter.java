@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.schedario.activity.BaseActivity;
@@ -61,6 +62,7 @@ public class SupplierAdapter extends ArrayAdapter<SupplierBean>{
 			mHolder.tv_phone_info = (TextView)v.findViewById(R.id.tv_phone_info);
 			mHolder.tv_contact_info = (TextView)v.findViewById(R.id.tv_contact_info);
 			mHolder.tv_address_info = (TextView)v.findViewById(R.id.tv_address_info);
+			mHolder.ll_container = (LinearLayout)v.findViewById(R.id.ll_container);
 			
 		}
 		else {
@@ -76,7 +78,6 @@ public class SupplierAdapter extends ArrayAdapter<SupplierBean>{
 			mHolder.tv_phone_info.setText(mVendor.getPhone());
 			mHolder.tv_contact_info.setText(mVendor.getContact_person());
 			mHolder.tv_address_info.setText(mVendor.getAddress());
-			
 		}		
 		return v;
 	}
@@ -84,7 +85,6 @@ public class SupplierAdapter extends ArrayAdapter<SupplierBean>{
 	class ViewHolder {
 		public TextView tv_product_info,tv_supplier_info,tv_phone_info,tv_contact_info,tv_address_info;
 		public Button btn_edit;
+		private LinearLayout ll_container;
 	}
-	
-	
 }

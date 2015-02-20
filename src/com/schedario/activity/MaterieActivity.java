@@ -21,7 +21,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -33,12 +35,16 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.schedario.activity.SupplierListActivity.AsyncDeleteSupplier;
 import com.schedario.adapter.GalleryAdapter;
+import com.schedario.bean.FirstImageBean;
 import com.schedario.constants.Constants;
 import com.schedario.network.KlHttpClient;
 
@@ -63,7 +69,7 @@ public class MaterieActivity extends BaseActivity{
 	
 	private LinearLayout  ll_include_take_photo,ll_include_gallery,ll_upload ;
 	
-	private ArrayList<String> list = new ArrayList<String>();
+	private ArrayList<FirstImageBean> list = new ArrayList<FirstImageBean>();
 	private GalleryAdapter adapter;
 	private  GridView gridView;
 	
@@ -93,8 +99,83 @@ public class MaterieActivity extends BaseActivity{
 		ll_upload.setOnClickListener(this);
 		
 		gridView = (GridView)findViewById(R.id.gv_gallery);
+		gridView.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+				
+				/*AlertDialog.Builder alert = new AlertDialog.Builder(
+						MaterieActivity.this);
+				alert.setMessage("Are you sure, you want to delete?");
+				alert.setPositiveButton("YES",
+						new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								dialog.dismiss();
+
+								new AsyncDeleteImage().execute();
+							}
+						});
+
+				alert.setNegativeButton("NO",
+						new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+
+								dialog.dismiss();
+							}
+						});
+				alert.show();*/
+				return false;
+			}
+		});
 		
 		displayView(0);
+	}
+	
+	public class AsyncDeleteImage extends AsyncTask<Void, Void, String>{
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			doShowLoading();
+		}
+		
+		@Override
+		protected String doInBackground(Void... params) {
+			JSONObject req = new JSONObject();
+			try {
+				req.put("user_id", app.getUserinfo().getUser_id());
+				String respponse = KlHttpClient.SendHttpPost(Constants.DELETE_IMAGE, req.toString());
+				if(respponse != null){
+					JSONObject ob = new JSONObject(respponse);
+					if(ob.getBoolean("status")){
+						return ob.getString("message");
+					}else{
+						return ob.getString("message");
+					}
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
+		@Override
+		protected void onPostExecute(String result) {
+			super.onPostExecute(result);
+			if(!result.equalsIgnoreCase("Successfully deleted")){
+				Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
+				new GalleryAsynctask().execute();
+			}else{
+				Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
+			}
+		}
 	}
 	
 	private void displayView(int position) {
@@ -288,7 +369,7 @@ public class MaterieActivity extends BaseActivity{
 		}
 	}
 	
-	public class GalleryAsynctask extends AsyncTask<Void, Void, ArrayList<String>> {
+	public class GalleryAsynctask extends AsyncTask<Void, Void, ArrayList<FirstImageBean>> {
 
 		@Override
 		protected void onPreExecute() {
@@ -297,7 +378,7 @@ public class MaterieActivity extends BaseActivity{
 		}
 
 		@Override
-		protected ArrayList<String> doInBackground(Void... params) {
+		protected ArrayList<FirstImageBean> doInBackground(Void... params) {
 
 			try {
 				JSONObject req = new JSONObject();
@@ -311,7 +392,8 @@ public class MaterieActivity extends BaseActivity{
 						list.clear();
 						for(int i=0; i<jArr.length(); i++){
 							String image  = jArr.getJSONObject(i).getString("image");
-						list.add(image);
+							String id = jArr.getJSONObject(i).getString("id");
+						list.add(new FirstImageBean(id, image));
 						}
 						return list;
 					}
@@ -323,7 +405,7 @@ public class MaterieActivity extends BaseActivity{
 		}
 
 		@Override
-		protected void onPostExecute(ArrayList<String> result) {
+		protected void onPostExecute(ArrayList<FirstImageBean> result) {
 			super.onPostExecute(result);
 			doRemoveLoading();
 			if(result!=null){

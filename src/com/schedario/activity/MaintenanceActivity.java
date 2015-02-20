@@ -39,6 +39,9 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.schedario.adapter.GalleryAdapter;
+import com.schedario.adapter.MaintanenceGalleryAdapter;
+import com.schedario.bean.FirstImageBean;
+import com.schedario.bean.SecondImageBean;
 import com.schedario.constants.Constants;
 import com.schedario.network.KlHttpClient;
 
@@ -63,8 +66,8 @@ public class MaintenanceActivity extends BaseActivity{
 	
 	private LinearLayout  ll_include_take_photo,ll_include_gallery,ll_upload ;
 	
-	private ArrayList<String> list = new ArrayList<String>();
-	private GalleryAdapter adapter;
+	private ArrayList<SecondImageBean> list = new ArrayList<SecondImageBean>();
+	private MaintanenceGalleryAdapter adapter;
 	private  GridView gridView;
 
 	@Override
@@ -289,7 +292,7 @@ public class MaintenanceActivity extends BaseActivity{
 		}
 	}
 	
-	public class GalleryAsynctask extends AsyncTask<Void, Void, ArrayList<String>> {
+	public class GalleryAsynctask extends AsyncTask<Void, Void, ArrayList<SecondImageBean>> {
 
 		@Override
 		protected void onPreExecute() {
@@ -298,7 +301,7 @@ public class MaintenanceActivity extends BaseActivity{
 		}
 
 		@Override
-		protected ArrayList<String> doInBackground(Void... params) {
+		protected ArrayList<SecondImageBean> doInBackground(Void... params) {
 
 			try {
 				JSONObject req = new JSONObject();
@@ -311,8 +314,12 @@ public class MaintenanceActivity extends BaseActivity{
 						JSONArray jArr = ob.getJSONArray("images");
 						list.clear();
 						for(int i=0; i<jArr.length(); i++){
-							String image  = jArr.getJSONObject(i).getString("image");
-						list.add(image);
+							JSONObject obj = jArr.getJSONObject(i);
+							String image  = obj.getString("image");
+							System.out.println("!!reach here image position:"+image);
+							String id = obj.getString("id");
+							System.out.println("!!reach here image id please:"+id);
+							list.add(new SecondImageBean(id, image));
 						}
 						return list;
 					}
@@ -324,11 +331,11 @@ public class MaintenanceActivity extends BaseActivity{
 		}
 
 		@Override
-		protected void onPostExecute(ArrayList<String> result) {
+		protected void onPostExecute(ArrayList<SecondImageBean> result) {
 			super.onPostExecute(result);
 			doRemoveLoading();
 			if(result!=null){
-				adapter = new GalleryAdapter(MaintenanceActivity.this, R.layout.row_gallery, result);
+				adapter = new MaintanenceGalleryAdapter(MaintenanceActivity.this, R.layout.row_gallery, result);
 				gridView.setAdapter(adapter);
 			}
 		}

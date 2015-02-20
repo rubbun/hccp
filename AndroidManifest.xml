@@ -79,10 +79,6 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".AuthorityActivity"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
             android:name=".FreezeActivity"
             android:screenOrientation="portrait" >
         </activity>
@@ -95,11 +91,23 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name="com.schedario.activity.AuthorityActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.schedario.activity.CompilatorActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="com.schedario.activity.PulicyActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.schedario.activity.AnimalActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".MeasureActivity"
             android:screenOrientation="portrait" >
         </activity>
 

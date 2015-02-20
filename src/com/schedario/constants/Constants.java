@@ -6,6 +6,7 @@ public class Constants {
 	public static final String SIGNUP = BASE_URL + "registration.php";
 	public static final String SIGNIN = BASE_URL + "login.php";
 	public static final String IMAGE = BASE_URL + "upload/";
+	public static final String IMAGE_SECOND = BASE_URL + "uploadSecond/";
 	public static final String GALLERY = BASE_URL + "gallery.php";
 	public static final String IMAGE_UPLOAD = BASE_URL + "imgupload.php";
 	public static final String IMAGE_UPLOAD_MAINTENANCE = BASE_URL + "maintenanceUpload.php";
@@ -24,6 +25,15 @@ public class Constants {
 	public static final String SHOW_PULICY = BASE_URL + "showRefPos.php";
 	public static final String ADD_ANIMAL = BASE_URL + "addAnimals.php";
 	public static final String SHOW_ANIMAL = BASE_URL + "showAnimals.php";
+	public static final String DELETE_SUPPLIER = BASE_URL + "deleteSupplier.php";
+	public static final String DELETE_IMAGE = BASE_URL + "deleteImage.php";
+	public static final String DELETE_IMAGE_SECOND = BASE_URL + "deleteImageSecond.php";
+	public static final String SHOW_MEASURE_DATA = BASE_URL + "showMeasures.php";
+	public static final String ADD_MEASURE_DATA = BASE_URL + "addMeasures.php";
+	public static final String ADD_AUTHORITY = BASE_URL + "addAuthority.php";
+	public static final String SHOW_AUTHORITY = BASE_URL + "showAuthority.php";
+	public static final String ADD_COMPILER = BASE_URL + "addCompilators.php";
+	public static final String SHOW_COMPILER = BASE_URL + "showCompilators.php";
 
 	public static String ADD_PULICY_CHECK = "";
 	public static String ADD_ANIMAL_CHECK = "";

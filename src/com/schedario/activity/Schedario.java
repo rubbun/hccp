@@ -9,7 +9,7 @@ public class Schedario extends BaseActivity {
 
 	private Intent mIntent;
 	private ImageView iv_materie, iv_maintenance, iv_supplier, iv_frigoriferi,
-			iv_autorita, iv_congelatori, iv_laboratorio,consumatori;
+			iv_autorita, iv_congelatori, iv_laboratorio,consumatori,conformita;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +28,11 @@ public class Schedario extends BaseActivity {
 		iv_frigoriferi = (ImageView) findViewById(R.id.iv_frigoriferi);
 		iv_frigoriferi.setOnClickListener(this);
 
-		iv_autorita = (ImageView) findViewById(R.id.iv_autorita);
-		iv_autorita.setOnClickListener(this);
-
 		iv_congelatori = (ImageView) findViewById(R.id.iv_congelatori);
 		iv_congelatori.setOnClickListener(this);
+		
+		conformita = (ImageView) findViewById(R.id.conformita);
+		conformita.setOnClickListener(this);
 
 		iv_laboratorio = (ImageView) findViewById(R.id.iv_laboratorio);
 		iv_laboratorio.setOnClickListener(this);
@@ -40,6 +40,8 @@ public class Schedario extends BaseActivity {
 		findViewById(R.id.pulizia).setOnClickListener(this);
 		findViewById(R.id.animali).setOnClickListener(this);
 		findViewById(R.id.consumatori).setOnClickListener(this);
+		findViewById(R.id.autorita).setOnClickListener(this);
+		findViewById(R.id.ceck).setOnClickListener(this);
 	}
 
 	@Override
@@ -67,11 +69,6 @@ public class Schedario extends BaseActivity {
 			startActivity(mIntent);
 			break;
 
-		case R.id.iv_autorita:
-			mIntent = new Intent(Schedario.this, AuthorityActivity.class);
-			startActivity(mIntent);
-			break;
-
 		case R.id.iv_congelatori:
 			mIntent = new Intent(Schedario.this, FreezeActivity.class);
 			startActivity(mIntent);
@@ -94,6 +91,22 @@ public class Schedario extends BaseActivity {
 			
 		case R.id.consumatori:
 			mIntent = new Intent(Schedario.this, UserdataInfoActivity.class);
+			startActivity(mIntent);
+			break;
+			
+		case R.id.conformita:
+			mIntent = new Intent(Schedario.this, MeasureActivity.class);
+			startActivity(mIntent);
+			break;
+			
+		case R.id.autorita:
+			
+			mIntent = new Intent(Schedario.this,AuthorityActivity.class);
+			startActivity(mIntent);
+			break;
+		case R.id.ceck:
+			
+			mIntent = new Intent(Schedario.this,CompilatorActivity.class);
 			startActivity(mIntent);
 			break;
 		}

@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue"
+    android:orientation="vertical" >
+    
+    <TextView
+        android:id="@+id/Label"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:gravity="center"
+        android:text="CheckList"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="7"
+        android:background="@xml/gradient_header"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        android:weightSum="1" >
+
+        <LinearLayout
+            android:id="@+id/ll_add_CheckList"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.50"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Compiler"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.50"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:layout_width="1dp"
+                android:layout_height="fill_parent"
+                android:background="#b9bdc2"
+                android:orientation="vertical" >
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_CheckList_list"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|center"
+                    android:gravity="center"
+                    android:text="Compiler List"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+    
+      <ViewFlipper
+                android:id="@+id/viewFlipper"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1" >
+        
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:weightSum="1" >
+        
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fillViewport="true" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp" >
+
+            <TextView
+               
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="Date" />
+
+            <EditText
+                android:id="@+id/editdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="date" />
+                
+                <TextView
+                
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="compiler" />
+<EditText
+                android:id="@+id/editCompiler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text" />
+
+<CheckBox android:textColor="@color/white" 
+   
+    android:id="@+id/checkBoxrecords"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:button="@null"
+    android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+    android:text="The records of the company handbook for food safety are updated" />
+
+<CheckBox android:textColor="@color/white"
+    android:id="@+id/checkBoxcritical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:button="@null"
+    android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+    android:text="The critical control points are monitored and recorded" />
+
+<CheckBox android:textColor="@color/white"
+    android:id="@+id/checkBoxincoming"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:button="@null"
+    android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+    android:text="The incoming raw materials are controlled" />
+
+<CheckBox android:textColor="@color/white"
+    android:id="@+id/checkBoxsanitation"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:button="@null"
+    android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+    android:text="The sanitation plan provided for herein is applied" />
+
+<CheckBox android:textColor="@color/white"
+    android:id="@+id/checkBoxpremises"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:button="@null"
+    android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+    android:text="The premises are clean" />
+
+<CheckBox android:textColor="@color/white"
+    android:id="@+id/checkBoxpremisesforeign"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:button="@null"
+    android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+    android:text="The premises are clear of foreign material" />
+
+<CheckBox android:textColor="@color/white"
+    android:id="@+id/checkBoxequipment"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:button="@null"
+    android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+    android:text="The equipment and utensils you have cleaned" />
+
+<CheckBox android:textColor="@color/white"
+    android:id="@+id/checkBoxmaterial"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:button="@null"
+    android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+    android:text="The material for the sanitization is properly stored and segregated" />
+
+<CheckBox android:textColor="@color/white"
+    android:id="@+id/checkBoxabsent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:button="@null"
+    android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+    android:text="Are absent signs of pests" />
+
+<CheckBox android:textColor="@color/white"
+    android:id="@+id/checkBoxchanging"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:button="@null"
+    android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+    android:text="The changing rooms and lockers personnel are clean and tidy" />
+
+<CheckBox android:textColor="@color/white"
+    android:id="@+id/checkBoxhygienic"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:button="@null"
+    android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+    android:text="The hygienic means washing hands are complete" />
+
+<CheckBox android:textColor="@color/white"
+    android:id="@+id/checkBoxwaste"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:button="@null"
+    android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+    android:text="The waste is placed away from food" />
+
+<CheckBox android:textColor="@color/white"
+    android:id="@+id/checkwastedisposal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:button="@null"
+    android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+    android:text="Waste disposal is done properly" />
+
+<CheckBox android:textColor="@color/white"
+    android:id="@+id/checkBoxtemperature"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:button="@null"
+    android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+    android:text="The temperature of refrigerated and non-refrigerated is respected" />
+
+<CheckBox android:textColor="@color/white"
+    android:id="@+id/checkBoxRegistration"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:button="@null"
+    android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+    android:text="Registration forms are properly filled in temperature / archived" />
+
+<CheckBox android:textColor="@color/white"
+    android:id="@+id/checkBoxprocessing"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:button="@null"
+    android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+    android:text="The processing flow respects the separation between clean and dirty circuit" />
+
+<CheckBox android:textColor="@color/white"
+    android:id="@+id/checkBoxprocesses"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:button="@null"
+    android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+    android:text="All processes are carried out in suitable environmental conditions and plant clean" />
+
+<CheckBox android:textColor="@color/white"
+    android:id="@+id/checkBoxpackaging"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:button="@null"
+    android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+    android:text="The packaging materials and packaging are protected and cleany" />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:text="any corrective action"
+    android:textColor="@color/white" />
+
+<EditText
+                android:id="@+id/editcorrective"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text" />
+
+<Button
+    android:id="@+id/buttonCheckList"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:text="Add CheckList" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
+         <ListView
+             android:id="@+id/lv_Checklist"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:divider="@color/black"
+             android:dividerHeight="2dp" >
+
+    </ListView>
+    </ViewFlipper>
+</LinearLayout>

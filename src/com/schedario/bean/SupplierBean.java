@@ -2,12 +2,14 @@ package com.schedario.bean;
 
 public class SupplierBean {
 
-	public String id, product, supplier, phone, contact_person, address;
+	public String user_id, supplier_id, product, supplier, phone,
+			contact_person, address;
 
-	public SupplierBean(String id, String product, String supplier,
-			String phone, String contact_person, String address) {
+	public SupplierBean(String user_id, String supplier_id, String product,
+			String supplier, String phone, String contact_person, String address) {
 		super();
-		this.id = id;
+		this.user_id = user_id;
+		this.supplier_id = supplier_id;
 		this.product = product;
 		this.supplier = supplier;
 		this.phone = phone;
@@ -15,12 +17,20 @@ public class SupplierBean {
 		this.address = address;
 	}
 
-	public String getId() {
-		return id;
+	public String getUser_id() {
+		return user_id;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+
+	public String getSupplier_id() {
+		return supplier_id;
+	}
+
+	public void setSupplier_id(String supplier_id) {
+		this.supplier_id = supplier_id;
 	}
 
 	public String getProduct() {
