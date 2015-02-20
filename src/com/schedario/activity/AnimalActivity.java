@@ -3,6 +3,7 @@ package com.schedario.activity;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,12 +21,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.Button;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
+import android.widget.AdapterView.OnItemSelectedListener;
 
 import com.schedario.adapter.PulicyListAdapter;
 import com.schedario.constants.Constants;
@@ -36,14 +40,16 @@ import com.schedario.util.Utility;
 public class AnimalActivity extends BaseActivity implements OnClickListener{
     SampleAlarmReceiver alarm = new SampleAlarmReceiver();
     
-    Button buttonAnimal;
+    Spinner buttonAnimal;
     public TextView textDate;
     public String month, day, year;
     ViewFlipper viewFlipper;
     public String checkAddorEdit="";
+    private int selection_value = -1;
     ListView lv_animals;
     //public boolean addedFromBackground;
     String[] listAnimals = {"No Animali infestanti/No Pets weeds", "roditori/rodents", "insetti/insects", "uccelli/birds"};
+    private List<String> spinnerArray =  new ArrayList<String>();
     
     @Override
     protected void onResume() {
@@ -63,8 +69,31 @@ public class AnimalActivity extends BaseActivity implements OnClickListener{
         
         viewFlipper = (ViewFlipper)findViewById(R.id.viewFlipper);
         textDate = (TextView)findViewById(R.id.textDate);
-        buttonAnimal = (Button)findViewById(R.id.buttonAnimal);
-        buttonAnimal.setOnClickListener(this);
+        buttonAnimal = (Spinner)findViewById(R.id.buttonAnimal);
+        spinnerArray.add("No Animali infestanti/No Pets weeds");
+        spinnerArray.add("roditori/rodents");
+        spinnerArray.add("insetti/insects");
+        spinnerArray.add("uccelli/birds");
+        buttonAnimal.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1, int pos, long arg3) {
+				selection_value = pos;
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				
+			}
+		});
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+        		AnimalActivity.this, android.R.layout.simple_spinner_item, spinnerArray);
+
+			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			buttonAnimal.setAdapter(adapter);
+			selection_value = 0;
+        
+        //buttonAnimal.setOnClickListener(this);
         lv_animals = (ListView)findViewById(R.id.lv_animals);
         findViewById(R.id.buttonAddAnimal).setOnClickListener(this);
 		findViewById(R.id.ll_add_animal).setOnClickListener(this);
@@ -77,7 +106,7 @@ public class AnimalActivity extends BaseActivity implements OnClickListener{
         alarm.setAlarm(this);*/
         
     }
-    LinearLayout laydivider = null;
+    /*LinearLayout laydivider = null;
     void dialogPulicySelection(){
     	
     	final Dialog dialog = new Dialog(this, android.R.style.Animation_Dialog);
@@ -109,7 +138,7 @@ public class AnimalActivity extends BaseActivity implements OnClickListener{
     	dialog.show();
     	
     }
-    
+    */
     public void parseSetDate(){
     	
     	final Calendar calendar = Calendar.getInstance();
@@ -142,7 +171,7 @@ public class AnimalActivity extends BaseActivity implements OnClickListener{
 		switch (v.getId()) {
 		case R.id.buttonAnimal:
 			
-			dialogPulicySelection();
+			//dialogPulicySelection();
 			break;
 		case R.id.ll_add_animal:
 			viewFlipper.showPrevious();	
@@ -161,11 +190,10 @@ public class AnimalActivity extends BaseActivity implements OnClickListener{
 			
 		if(isNetworkAvailable(this)){
 			checkAddorEdit = "add";
-			if(!buttonAnimal.getText().toString().equals("Select Animal")){
+			if(!spinnerArray.get(selection_value).toString().equals("Select Animal")){
 				Constants.ADD_ANIMAL_CHECK = textDate.getText().toString()+"("+"Animal"+")";
 				String check = Utility.getValueFromPersistence(this, Constants.ADD_ANIMAL_CHECK);
-				if(Utility.getValueFromPersistence(AnimalActivity.this, Constants.ADD_ANIMAL_CHECK).equalsIgnoreCase("NA")
-						&& !Utility.getValueFromPersistence(AnimalActivity.this, Constants.ADD_ANIMAL_CHECK).equalsIgnoreCase("Yes")){
+				if(!Utility.getValueFromPersistence(AnimalActivity.this, Constants.ADD_ANIMAL_CHECK).equalsIgnoreCase("Yes")){
 				new AddorShowPulicy().execute();
 				}else{
 					Toast.makeText(this, "Already Added an animal for today", Toast.LENGTH_LONG).show();
@@ -202,14 +230,13 @@ public class AnimalActivity extends BaseActivity implements OnClickListener{
 				req.put("user_id", app.getUserinfo().user_id);
 				
 				if(checkAddorEdit.equals("add")){
-					req.put("name", buttonAnimal.getText().toString());
+					req.put("name", spinnerArray.get(selection_value).toString());
 					parseSetDate();
 					//textDate.setText(month+"/"+day+"/"+year);
 					req.put("added_date", month+"/"+day+"/"+year);
 					Constants.ADD_ANIMAL_CHECK = month+"/"+day+"/"+year+"("+"Animal"+")";
 					String check = Utility.getValueFromPersistence(AnimalActivity.this, Constants.ADD_ANIMAL_CHECK);
-					if(Utility.getValueFromPersistence(AnimalActivity.this, Constants.ADD_ANIMAL_CHECK).equalsIgnoreCase("NA")
-							&& !Utility.getValueFromPersistence(AnimalActivity.this, Constants.ADD_ANIMAL_CHECK).equalsIgnoreCase("Yes"))
+					if(!Utility.getValueFromPersistence(AnimalActivity.this, Constants.ADD_ANIMAL_CHECK).equalsIgnoreCase("Yes"))
 					
 					response = KlHttpClient.SendHttpPost(Constants.ADD_ANIMAL, req.toString());
 					if (response != null) {

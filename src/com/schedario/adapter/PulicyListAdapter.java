@@ -52,6 +52,7 @@ public class PulicyListAdapter extends ArrayAdapter<HashMap<String, String>>{
 			mHolder = new ViewHolder();
 			v.setTag(mHolder);
 			mHolder.tv_pulicy_info = (TextView)v.findViewById(R.id.tv_pulicy_info);
+			mHolder.tv_desc = (TextView)v.findViewById(R.id.tv_desc);
 			
 		}
 		else {
@@ -61,15 +62,13 @@ public class PulicyListAdapter extends ArrayAdapter<HashMap<String, String>>{
 		final HashMap<String, String> hash = item.get(position);
 		if(hash != null){
 
-			mHolder.tv_pulicy_info.setText(hash.get("added_date")+" | "+hash.get("name"));
-			
+			mHolder.tv_pulicy_info.setText(hash.get("added_date"));
+			mHolder.tv_desc.setText(""+hash.get("name"));
 		}		
 		return v;
 	}
 
 	class ViewHolder {
-		public TextView tv_pulicy_info;
+		public TextView tv_pulicy_info,tv_desc;
 	}
-	
-	
 }

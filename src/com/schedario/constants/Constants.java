@@ -35,8 +35,13 @@ public class Constants {
 	public static final String ADD_COMPILER = BASE_URL + "addCompilators.php";
 	public static final String SHOW_COMPILER = BASE_URL + "showCompilators.php";
 
+	public static final String ADD_special_temperature = BASE_URL + "addSpecialTemperature.php";
+
 	public static String ADD_PULICY_CHECK = "";
 	public static String ADD_ANIMAL_CHECK = "";
+	public static String ADD_FREEZE_CHECK = "";
+	public static String ADD_REFRIGERATOR_CHECK = "";
+	public static String USERID = "";
 	
 	public enum values{
 		USERINFO,

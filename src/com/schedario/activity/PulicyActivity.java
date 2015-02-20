@@ -3,6 +3,7 @@ package com.schedario.activity;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,12 +21,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.Button;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
+import android.widget.AdapterView.OnItemSelectedListener;
 
 import com.schedario.adapter.PulicyListAdapter;
 import com.schedario.constants.Constants;
@@ -34,14 +38,15 @@ import com.schedario.util.Utility;
 
 public class PulicyActivity extends BaseActivity implements OnClickListener{
     
-    Button buttonPulicy;
+	Spinner buttonPulicy;
     public TextView textDate;
     public String month, day, year;
     ViewFlipper viewFlipper;
-    public String checkAddorEdit="";
+    public String checkAddorShow="";
     ListView lv_pulicy;
+    private int selection_value = -1;
     //public boolean addedFromBackground;
-    
+    private List<String> spinnerArray =  new ArrayList<String>();
     @Override
     protected void onResume() {
     	// TODO Auto-generated method stub
@@ -60,8 +65,30 @@ public class PulicyActivity extends BaseActivity implements OnClickListener{
         
         viewFlipper = (ViewFlipper)findViewById(R.id.viewFlipper);
         textDate = (TextView)findViewById(R.id.textDate);
-        buttonPulicy = (Button)findViewById(R.id.buttonPulicy);
-        buttonPulicy.setOnClickListener(this);
+        buttonPulicy = (Spinner)findViewById(R.id.buttonPulicy);
+        spinnerArray.add("PO");
+        spinnerArray.add("PS");
+        buttonPulicy.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1, int pos, long arg3) {
+				selection_value = pos;
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				
+			}
+		});
+        
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+        		PulicyActivity.this, android.R.layout.simple_spinner_item, spinnerArray);
+
+			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			buttonPulicy.setAdapter(adapter);
+			selection_value = 0;
+        
+        //buttonPulicy.setOnClickListener(this);
         lv_pulicy = (ListView)findViewById(R.id.lv_pulicy);
         findViewById(R.id.buttonAddPulicy).setOnClickListener(this);
 		findViewById(R.id.ll_add_pulicy).setOnClickListener(this);
@@ -72,7 +99,7 @@ public class PulicyActivity extends BaseActivity implements OnClickListener{
         
         
     }
-    LinearLayout laydivider = null;
+   /* LinearLayout laydivider = null;
     void dialogPulicySelection(){
     	
     	final Dialog dialog = new Dialog(this, android.R.style.Animation_Dialog);
@@ -107,7 +134,7 @@ public class PulicyActivity extends BaseActivity implements OnClickListener{
     	dialog.setContentView(linear);
     	dialog.show();
     	
-    }
+    }*/
     
     public void parseSetDate(){
     	
@@ -142,7 +169,7 @@ public class PulicyActivity extends BaseActivity implements OnClickListener{
 		switch (v.getId()) {
 		case R.id.buttonPulicy:
 			
-			dialogPulicySelection();
+			//dialogPulicySelection();
 			break;
 		case R.id.ll_add_pulicy:
 			viewFlipper.showPrevious();	
@@ -151,7 +178,7 @@ public class PulicyActivity extends BaseActivity implements OnClickListener{
 			
 			if(isNetworkAvailable(this)){
 				viewFlipper.showNext();	
-				checkAddorEdit = "show";
+				checkAddorShow = "show";
 				new AddorShowPulicy().execute();
 			}else{
 				Toast.makeText(this, "Please check internet connectivity", Toast.LENGTH_LONG).show();
@@ -160,12 +187,11 @@ public class PulicyActivity extends BaseActivity implements OnClickListener{
 		case R.id.buttonAddPulicy:
 			
 		if(isNetworkAvailable(this)){
-			checkAddorEdit = "add";
-			if(!buttonPulicy.getText().toString().equals("Select Pulicy")){
+			checkAddorShow = "add";
+			if(!spinnerArray.get(selection_value).toString().equals("Select Pulicy")){
 				Constants.ADD_PULICY_CHECK = textDate.getText().toString()+"("+"Pulicy"+")";
 				String check = Utility.getValueFromPersistence(this, Constants.ADD_PULICY_CHECK);
-				if(Utility.getValueFromPersistence(PulicyActivity.this, Constants.ADD_PULICY_CHECK).equalsIgnoreCase("NA")
-						&& !Utility.getValueFromPersistence(PulicyActivity.this, Constants.ADD_PULICY_CHECK).equalsIgnoreCase("Yes")){
+				if(!Utility.getValueFromPersistence(PulicyActivity.this, Constants.ADD_PULICY_CHECK).equalsIgnoreCase("Yes")){
 				new AddorShowPulicy().execute();
 				}else{
 					Toast.makeText(this, "Already Added a pulicy for today", Toast.LENGTH_LONG).show();
@@ -201,14 +227,13 @@ public class PulicyActivity extends BaseActivity implements OnClickListener{
 				JSONObject req = new JSONObject();
 				req.put("user_id", app.getUserinfo().user_id);
 				
-				if(checkAddorEdit.equals("add")){
-					req.put("name", buttonPulicy.getText().toString());
+				if(checkAddorShow.equals("add")){
+					req.put("name", spinnerArray.get(selection_value).toString());
 					parseSetDate();
 					//textDate.setText(month+"/"+day+"/"+year);
 					Constants.ADD_PULICY_CHECK = month+"/"+day+"/"+year+"("+"Pulicy"+")";
 					req.put("added_date", month+"/"+day+"/"+year);
-					if(Utility.getValueFromPersistence(PulicyActivity.this, Constants.ADD_PULICY_CHECK).equalsIgnoreCase("NA")
-							&& !Utility.getValueFromPersistence(PulicyActivity.this, Constants.ADD_PULICY_CHECK).equalsIgnoreCase("Yes"))
+					if(!Utility.getValueFromPersistence(PulicyActivity.this, Constants.ADD_PULICY_CHECK).equalsIgnoreCase("Yes"))
 					
 					response = KlHttpClient.SendHttpPost(Constants.ADD_PULICY, req.toString());
 					if (response != null) {
@@ -217,7 +242,7 @@ public class PulicyActivity extends BaseActivity implements OnClickListener{
 						message = ob.getString("message");
 					}
 					
-				}else if(checkAddorEdit.equals("show")){
+				}else if(checkAddorShow.equals("show")){
 					
 					response = KlHttpClient.SendHttpPost(Constants.SHOW_PULICY, req.toString());
 					if (response != null) {
@@ -258,10 +283,10 @@ public class PulicyActivity extends BaseActivity implements OnClickListener{
 			super.onPostExecute(arrresult);
 			doRemoveLoading();
 			if(result){
-				if(checkAddorEdit.equals("show")){
+				if(checkAddorShow.equals("show")){
 					PulicyListAdapter adapter = new PulicyListAdapter(PulicyActivity.this, R.layout.pulicylist_row, arrresult);
 					lv_pulicy.setAdapter(adapter);
-				}else if(checkAddorEdit.equals("add")){
+				}else if(checkAddorShow.equals("add")){
 					Toast.makeText(PulicyActivity.this, message, Toast.LENGTH_LONG).show();
 					Constants.ADD_PULICY_CHECK = textDate.getText().toString()+"("+"Pulicy"+")";
 					Utility.storeValueOnPersistence(PulicyActivity.this, Constants.ADD_PULICY_CHECK, "Yes");

@@ -16,10 +16,11 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight=".35"
+            android:layout_weight=".30"
             android:background="@color/white"
-            android:gravity="center"
-            android:orientation="vertical" >
+            android:gravity="center|left"
+            android:orientation="vertical"
+            android:paddingLeft="7dp" >
 
             <TextView
                 android:id="@+id/textView"
@@ -34,11 +35,11 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight=".65"
+            android:layout_weight=".50"
             android:background="@color/white"
             android:gravity="center|left"
-            android:paddingLeft="10dp"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:paddingLeft="7dp" >
 
             <TextView
                 android:id="@+id/textView3"
@@ -49,15 +50,33 @@
                 android:textColor="@color/black"
                 android:textStyle="bold" />
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".20"
+            android:background="@color/white"
+            android:gravity="center|left"
+            android:orientation="vertical"
+            android:paddingLeft="7dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hour"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+        </LinearLayout>
     </LinearLayout>
 
     <ListView
         android:id="@+id/lv_measuredatalist"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
+        android:layout_marginTop="3dp"
         android:divider="@color/transparent"
-        android:dividerHeight="2dp"
-        android:layout_marginTop="3dp" >
+        android:dividerHeight="2dp" >
     </ListView>
 
 </LinearLayout>

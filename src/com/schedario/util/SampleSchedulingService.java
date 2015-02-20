@@ -70,25 +70,31 @@ public class SampleSchedulingService extends IntentService {
         		int hour  = calendar.get(Calendar.HOUR_OF_DAY);
         		int minutes = calendar.get(Calendar.MINUTE);
         		dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-        		if(hour>=16&&minutes>=0)
+        		//if(hour>=16&&minutes>=0)
         		
         		pulicyActivity.parseSetDate();
         		date = pulicyActivity.month+"/"+pulicyActivity.day+"/"+pulicyActivity.year;
         		Constants.ADD_PULICY_CHECK = date+"("+"Pulicy"+")";
         		Constants.ADD_ANIMAL_CHECK = date+"("+"Animal"+")";
         		
-        		String checkpulicy = Utility.getValueFromPersistence(this, Constants.ADD_PULICY_CHECK);
-        		String checkanimal = Utility.getValueFromPersistence(this, Constants.ADD_PULICY_CHECK);
-        		if(Utility.getValueFromPersistence(this, Constants.ADD_PULICY_CHECK).equalsIgnoreCase("NA")
-						&& !Utility.getValueFromPersistence(this, Constants.ADD_PULICY_CHECK).equalsIgnoreCase("Yes")){
-        			
+        		//String checkpulicy = Utility.getValueFromPersistence(this, Constants.ADD_PULICY_CHECK);
+        		//String checkanimal = Utility.getValueFromPersistence(this, Constants.ADD_PULICY_CHECK);
+        		if(!Utility.getValueFromPersistence(this, Constants.ADD_PULICY_CHECK).equalsIgnoreCase("Yes")){
+        			if(hour>=16&&hour<=24)
         			//pulicyActivity.checkAddorEdit = "add";
         			addPulicy();
-        		}else if(Utility.getValueFromPersistence(this, Constants.ADD_ANIMAL_CHECK).equalsIgnoreCase("NA")
-						&& !Utility.getValueFromPersistence(this, Constants.ADD_ANIMAL_CHECK).equalsIgnoreCase("Yes")){
-        			
+        		}else if(!Utility.getValueFromPersistence(this, Constants.ADD_ANIMAL_CHECK).equalsIgnoreCase("Yes")){
+        			if(hour>=16&&hour<=24)
         			//pulicyActivity.checkAddorEdit = "add";
         			addAnimal();
+        		}else if(!Utility.getValueFromPersistence(this, Constants.ADD_FREEZE_CHECK).equalsIgnoreCase("Yes")){
+        			if(hour>=16&&hour<=24)
+        			//pulicyActivity.checkAddorEdit = "add";
+        			addFridge();
+        		}else if(!Utility.getValueFromPersistence(this, Constants.ADD_REFRIGERATOR_CHECK).equalsIgnoreCase("Yes")){
+        			if(hour>=16&&hour<=24)
+        			//pulicyActivity.checkAddorEdit = "add";
+        			addRefrigerator();
         		}
         	}else{
         		Toast.makeText(this, "Please check internet connectivity", Toast.LENGTH_LONG).show();
@@ -193,7 +199,7 @@ public class SampleSchedulingService extends IntentService {
 		String response = null;
 		try {
 			JSONObject req = new JSONObject();
-			req.put("user_id", "9");
+			req.put("user_id", Utility.getValueFromPersistence(this,  Constants.USERID));
 			if(dayOfWeek==5){
 				//thursday
 				req.put("name", "PS");
@@ -221,7 +227,7 @@ public class SampleSchedulingService extends IntentService {
 		String response = null;
 		try {
 			JSONObject req = new JSONObject();
-			req.put("user_id", "9");
+			req.put("user_id", Utility.getValueFromPersistence(this,  Constants.USERID));
 			req.put("name", "No Animali infestanti/No Pets weeds");
 			req.put("added_date", date);
 			
@@ -240,6 +246,49 @@ public class SampleSchedulingService extends IntentService {
     }
     
     
+    void addRefrigerator(){
+		String response = null;
+		try {
+			JSONObject req = new JSONObject();
+			req.put("user_id", Utility.getValueFromPersistence(this,  Constants.USERID));
+			req.put("type", "ref");
+			req.put("added_date", date);
+			
+			response = KlHttpClient.SendHttpPost(Constants.ADD_special_temperature, req.toString());
+			if (response != null) {
+				JSONObject ob = new JSONObject(response);
+				boolean result = ob.getBoolean("status");
+				if(result)
+					Constants.ADD_REFRIGERATOR_CHECK = date+"("+"ref"+")";
+					Utility.storeValueOnPersistence(this, Constants.ADD_REFRIGERATOR_CHECK, "Yes");
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+    }
     
+    
+    void addFridge(){
+		String response = null;
+		try {
+			JSONObject req = new JSONObject();
+			req.put("user_id", Utility.getValueFromPersistence(this,  Constants.USERID));
+			req.put("type", "freeze");
+			req.put("added_date", date);
+			
+			response = KlHttpClient.SendHttpPost(Constants.ADD_special_temperature, req.toString());
+			if (response != null) {
+				JSONObject ob = new JSONObject(response);
+				boolean result = ob.getBoolean("status");
+				if(result)
+					Constants.ADD_FREEZE_CHECK = date+"("+"freeze"+")";
+					Utility.storeValueOnPersistence(this, Constants.ADD_FREEZE_CHECK, "Yes");
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+    }
     
 }

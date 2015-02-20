@@ -3,6 +3,8 @@ package com.schedario.activity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Activity;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,6 +16,8 @@ import android.widget.EditText;
 
 import com.schedario.constants.Constants;
 import com.schedario.network.KlHttpClient;
+import com.schedario.util.SampleAlarmReceiver;
+import com.schedario.util.Utility;
 import com.schedario.utils.UserInfo;
 
 public class LoginActivity extends BaseActivity {
@@ -21,11 +25,14 @@ public class LoginActivity extends BaseActivity {
 	private EditText et_username, et_password;
 	private Button btn_login, btn_register;
 	private CheckBox cb_remember;
+	SampleAlarmReceiver alarm = new SampleAlarmReceiver();
+	Activity activity;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
+		activity = LoginActivity.this;
 		et_username = (EditText) findViewById(R.id.et_username);
 		et_password = (EditText) findViewById(R.id.et_password);
 
@@ -70,7 +77,7 @@ public class LoginActivity extends BaseActivity {
 
 		}
 	}
-
+	String user_id;
 	public class LoginAsynctask extends AsyncTask<Void, Void, Boolean> {
 
 		@Override
@@ -93,7 +100,7 @@ public class LoginActivity extends BaseActivity {
 					JSONObject ob = new JSONObject(response);
 					if (ob.getBoolean("status")) {
 						Log.e("!reach here", "reach here");
-						String user_id = ob.getString("id");
+						user_id = ob.getString("id");
 						String company = ob.getString("company_name");
 						String address = ob.getString("legal_address");
 						String city = ob.getString("city");
@@ -125,6 +132,11 @@ public class LoginActivity extends BaseActivity {
 			super.onPostExecute(result);
 			doRemoveLoading();
 			if(result){
+				boolean alarmUp = (PendingIntent.getBroadcast(activity, 10, new Intent(activity, SampleAlarmReceiver.class), PendingIntent.FLAG_NO_CREATE) != null);
+		    	if(!alarmUp){
+		        alarm.setAlarm(activity);
+		    	}
+		    	Utility.storeValueOnPersistence(activity, Constants.USERID, user_id);
 				Intent intent = new Intent(LoginActivity.this, Schedario.class);
 				startActivity(intent);
 				LoginActivity.this.finish();

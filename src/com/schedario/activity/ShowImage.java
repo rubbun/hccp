@@ -14,9 +14,9 @@ public class ShowImage extends BaseActivity{
 	
 	public ImageLoader imageloader;
 	private ImageView iv_image;
-	Animation anim1,anim2;
+	Animation anim1,anim2,anim3,anim4;
 	private LinearLayout ll_footer;
-	public boolean flag = false;
+	public int val = 1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +27,8 @@ public class ShowImage extends BaseActivity{
 		
 		anim1 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim1);
 		anim2 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim2);
+		anim3 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim3);
+		anim4 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim4);
 		
 		ll_footer = (LinearLayout) findViewById(R.id.ll_footer);
 		ll_footer.setOnClickListener(this);
@@ -48,12 +50,18 @@ public class ShowImage extends BaseActivity{
 
 		switch (v.getId()) {
 		case R.id.ll_footer:
-			if(!flag){
-				flag = true;
+			if(val == 1){
+				val = val + 1;
 				iv_image.startAnimation(anim1);
-			}else{
-				flag = false;
+			}else if(val == 2){
+				val = val + 1;
 				iv_image.startAnimation(anim2);
+			}else if(val == 3){
+				val = val + 1;
+				iv_image.startAnimation(anim3);
+			}else if(val == 4){
+				val = 1;
+				iv_image.startAnimation(anim4);
 			}
 			
 			break;

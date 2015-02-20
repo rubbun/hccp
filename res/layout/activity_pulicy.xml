@@ -2,9 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/gradient"
-    >
+    android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -57,11 +56,8 @@
                     android:gravity="center"
                     android:text="Pulicy List"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
-
             </LinearLayout>
-
         </LinearLayout>
-
     </LinearLayout>
 
     <ViewFlipper
@@ -71,57 +67,118 @@
         android:layout_marginTop="10dp"
         android:layout_weight="0.1" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical" >
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="10dp" >
 
-            <TextView
-                android:id="@+id/textDate"
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_weight="1.5"
-                android:text="Date" />
+                android:layout_marginBottom="20dp"
+                android:background="@color/white"
+                android:orientation="vertical" >
 
-            <Button
+                <TextView
+                    android:id="@+id/textDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="10dp"
+                    android:text="Date"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:paddingLeft="0dp"
+                    android:paddingRight="20dp"
+                    android:src="@drawable/date_icon" />
+            </FrameLayout>
+
+            <Spinner
                 android:id="@+id/buttonPulicy"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginBottom="20dp"
                 android:layout_weight="1"
-                android:background="@xml/gradient_header"
+                android:background="@color/white"
+                android:prompt="@string/select_pulicy"
                 android:text="Select Pulicy" />
+
+            <Button
+                android:id="@+id/buttonAddPulicy"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@xml/rounded_corner_btn"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Add pulicy" />
         </LinearLayout>
-        
-         <Button
-             android:id="@+id/buttonAddPulicy"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_gravity="center_horizontal"
-             android:layout_margin="10dp"
-             android:background="@xml/gradient_header"
-             android:paddingLeft="10dp"
-             android:paddingRight="10dp"
-             android:text="Add pulicy" />
 
- </LinearLayout>
- 
-    
-   <ListView
-        android:id="@+id/lv_pulicy"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:divider="@color/transparent"
-        android:dividerHeight="2dp" >
-    </ListView>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:weightSum="1" >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".30"
+                    android:gravity="center|left"
+                    android:orientation="vertical"
+                    android:paddingLeft="7dp" >
+
+                    <TextView
+                        android:id="@+id/textView1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Date"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".50"
+                    android:gravity="center|left"
+                    android:orientation="vertical"
+                    android:paddingLeft="7dp" >
+
+                    <TextView
+                        android:id="@+id/textView1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Description"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/lv_pulicy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@color/transparent"
+                android:dividerHeight="2dp" >
+            </ListView>
+        </LinearLayout>
     </ViewFlipper>
-
-   
-
-   
 
 </LinearLayout>
