@@ -24,6 +24,7 @@ import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.schedario.adapter.AuthorityAdapter;
+import com.schedario.adapter.CompilatorAdapter;
 import com.schedario.constants.Constants;
 import com.schedario.network.KlHttpClient;
 
@@ -31,11 +32,16 @@ public class CompilatorActivity extends BaseActivity implements OnClickListener 
 
 	ViewFlipper viewFlipper;
 	ListView lv_Checklist;
-	CheckBox checkBoxrecords, checkBoxcritical, checkBoxincoming, checkBoxsanitation, checkBoxpremises, checkBoxpremisesforeign, checkBoxequipment, checkBoxmaterial, checkBoxabsent, checkBoxchanging, checkBoxhygienic, checkBoxwaste, checkwastedisposal, checkBoxtemperature, checkBoxRegistration, checkBoxprocessing, checkBoxprocesses, checkBoxpackaging;
+	CheckBox checkBoxrecords, checkBoxcritical, checkBoxincoming,
+			checkBoxsanitation, checkBoxpremises, checkBoxpremisesforeign,
+			checkBoxequipment, checkBoxmaterial, checkBoxabsent,
+			checkBoxchanging, checkBoxhygienic, checkBoxwaste,
+			checkwastedisposal, checkBoxtemperature, checkBoxRegistration,
+			checkBoxprocessing, checkBoxprocesses, checkBoxpackaging;
 	EditText editCompiler, editdate, editcorrective;
 	public String checkAddorShow = "";
-	private LinearLayout ll_tab1, ll_tab2,ll_add, ll_show;;
-	//private ArrayList<Compilator> compilators = new ArrayList<Compilator>();
+	private LinearLayout ll_tab1, ll_tab2, ll_add, ll_show;;
+	// private ArrayList<Compilator> compilators = new ArrayList<Compilator>();
 	private ListView lv_list_data;
 
 	@Override
@@ -48,7 +54,7 @@ public class CompilatorActivity extends BaseActivity implements OnClickListener 
 		ll_show = (LinearLayout) findViewById(R.id.ll_show);
 		ll_tab1.setOnClickListener(this);
 		ll_tab2.setOnClickListener(this);
-		lv_list_data = (ListView)findViewById(R.id.lv_list_data);
+		lv_list_data = (ListView) findViewById(R.id.lv_list_data);
 		initview();
 
 	}
@@ -62,10 +68,11 @@ public class CompilatorActivity extends BaseActivity implements OnClickListener 
 			if (isNetworkAvailable(this)) {
 				// viewFlipper.showNext();
 				checkAddorShow = "add";
-				if(isValid())
-				new AddorShowCompilator().execute();
+				if (isValid())
+					new AddorShowCompilator().execute();
 			} else {
-				Toast.makeText(this, "Please check internet connectivity", Toast.LENGTH_LONG).show();
+				Toast.makeText(this, "Please check internet connectivity",
+						Toast.LENGTH_LONG).show();
 			}
 			break;
 		case R.id.ll_add_authority:
@@ -81,30 +88,35 @@ public class CompilatorActivity extends BaseActivity implements OnClickListener 
 		}
 	}
 
-	String records, critical, incoming, sanitation, premises, premisesforeign, equipment, material, absent, changing, hygienic, waste, wastedisposal, temperature, Registration, processing, processes, packaging, compiler, date, corrective;
+	String records, critical, incoming, sanitation, premises, premisesforeign,
+			equipment, material, absent, changing, hygienic, waste,
+			wastedisposal, temperature, Registration, processing, processes,
+			packaging, compiler, date, corrective;
 
 	private boolean isValid() {
-		/*records = checkBoxrecords.getText().toString().trim();
-		critical = checkBoxcritical.getText().toString().trim();
-		incoming = checkBoxincoming.getText().toString().trim();
-		sanitation = checkBoxsanitation.getText().toString().trim();
-		premises = checkBoxpremises.getText().toString().trim();
-		premisesforeign = checkBoxpremisesforeign.getText().toString().trim();
-		equipment = checkBoxequipment.getText().toString().trim();
-		material = checkBoxmaterial.getText().toString().trim();
-		absent = checkBoxabsent.getText().toString().trim();
-		changing = checkBoxchanging.getText().toString().trim();
-		hygienic = checkBoxhygienic.getText().toString().trim();
-		waste = checkBoxwaste.getText().toString().trim();
-		wastedisposal = checkwastedisposal.getText().toString().trim();
-		temperature = checkBoxtemperature.getText().toString().trim();
-		Registration = checkBoxRegistration.getText().toString().trim();
-		processing = checkBoxprocessing.getText().toString().trim();
-		processes = checkBoxprocesses.getText().toString().trim();
-		packaging = checkBoxpackaging.getText().toString().trim();*/
+		/*
+		 * records = checkBoxrecords.getText().toString().trim(); critical =
+		 * checkBoxcritical.getText().toString().trim(); incoming =
+		 * checkBoxincoming.getText().toString().trim(); sanitation =
+		 * checkBoxsanitation.getText().toString().trim(); premises =
+		 * checkBoxpremises.getText().toString().trim(); premisesforeign =
+		 * checkBoxpremisesforeign.getText().toString().trim(); equipment =
+		 * checkBoxequipment.getText().toString().trim(); material =
+		 * checkBoxmaterial.getText().toString().trim(); absent =
+		 * checkBoxabsent.getText().toString().trim(); changing =
+		 * checkBoxchanging.getText().toString().trim(); hygienic =
+		 * checkBoxhygienic.getText().toString().trim(); waste =
+		 * checkBoxwaste.getText().toString().trim(); wastedisposal =
+		 * checkwastedisposal.getText().toString().trim(); temperature =
+		 * checkBoxtemperature.getText().toString().trim(); Registration =
+		 * checkBoxRegistration.getText().toString().trim(); processing =
+		 * checkBoxprocessing.getText().toString().trim(); processes =
+		 * checkBoxprocesses.getText().toString().trim(); packaging =
+		 * checkBoxpackaging.getText().toString().trim();
+		 */
 		compiler = editCompiler.getText().toString().trim();
 		date = editdate.getText().toString().trim();
-		//corrective = editcorrective.getText().toString().trim();
+		// corrective = editcorrective.getText().toString().trim();
 
 		boolean flag = true;
 		if (compiler.length() == 0) {
@@ -113,7 +125,7 @@ public class CompilatorActivity extends BaseActivity implements OnClickListener 
 		} else if (date.length() == 0) {
 			editdate.setError("Please Enter your Address");
 			flag = false;
-		} 
+		}
 		return flag;
 	}
 
@@ -121,7 +133,8 @@ public class CompilatorActivity extends BaseActivity implements OnClickListener 
 	String message = "";
 	ArrayList<HashMap<String, String>> arrhash = new ArrayList<HashMap<String, String>>();
 
-	public class AddorShowCompilator extends AsyncTask<Void, Void, ArrayList<HashMap<String, String>>> {
+	public class AddorShowCompilator extends
+			AsyncTask<Void, Void, ArrayList<HashMap<String, String>>> {
 
 		@Override
 		protected void onPreExecute() {
@@ -130,7 +143,8 @@ public class CompilatorActivity extends BaseActivity implements OnClickListener 
 		}
 
 		@Override
-		protected ArrayList<HashMap<String, String>> doInBackground(Void... params) {
+		protected ArrayList<HashMap<String, String>> doInBackground(
+				Void... params) {
 			String response = null;
 			try {
 				JSONObject req = new JSONObject();
@@ -160,7 +174,8 @@ public class CompilatorActivity extends BaseActivity implements OnClickListener 
 					req.put("packaging_materials", packaging);
 					req.put("corrective_action", corrective);
 
-					response = KlHttpClient.SendHttpPost(Constants.ADD_COMPILER, req.toString());
+					response = KlHttpClient.SendHttpPost(
+							Constants.ADD_COMPILER, req.toString());
 
 					if (response != null) {
 						JSONObject ob = new JSONObject(response);
@@ -177,21 +192,25 @@ public class CompilatorActivity extends BaseActivity implements OnClickListener 
 		}
 
 		@Override
-		protected void onPostExecute(ArrayList<HashMap<String, String>> arrresult) {
+		protected void onPostExecute(
+				ArrayList<HashMap<String, String>> arrresult) {
 			super.onPostExecute(arrresult);
 			doRemoveLoading();
 			if (resultResponse) {
 				if (checkAddorShow.equals("show")) {
-					AuthorityAdapter adapter = new AuthorityAdapter(CompilatorActivity.this, R.layout.authority_list_row, arrresult);
+					AuthorityAdapter adapter = new AuthorityAdapter(
+							CompilatorActivity.this,
+							R.layout.authority_list_row, arrresult);
 					lv_Checklist.setAdapter(adapter);
 				} else if (checkAddorShow.equals("add")) {
 
-					Toast.makeText(CompilatorActivity.this, message, Toast.LENGTH_LONG).show();
+					Toast.makeText(CompilatorActivity.this, message,
+							Toast.LENGTH_LONG).show();
 				}
 			}
 		}
 	}
-	
+
 	public class ShowCompilator extends AsyncTask<Void, Void, JSONArray> {
 
 		@Override
@@ -207,15 +226,15 @@ public class CompilatorActivity extends BaseActivity implements OnClickListener 
 				JSONObject req = new JSONObject();
 
 				req.put("user_id", app.getUserinfo().user_id);
-				
 
-					response = KlHttpClient.SendHttpPost(Constants.SHOW_COMPILER, req.toString());
-					if(response!=null){
-						JSONObject jsonObject = new JSONObject(response);
-						if(jsonObject.getBoolean("status")){
-							return jsonObject.getJSONArray("compilators");
-						}
+				response = KlHttpClient.SendHttpPost(Constants.SHOW_COMPILER,
+						req.toString());
+				if (response != null) {
+					JSONObject jsonObject = new JSONObject(response);
+					if (jsonObject.getBoolean("status")) {
+						return jsonObject.getJSONArray("compilators");
 					}
+				}
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
@@ -226,20 +245,24 @@ public class CompilatorActivity extends BaseActivity implements OnClickListener 
 		protected void onPostExecute(JSONArray arrresult) {
 			super.onPostExecute(arrresult);
 			doRemoveLoading();
-			if (arrresult!=null) {
-				//CompilatorAdapter adapter = new CompilatorAdapter(CompilatorActivity.this, arrresult, R.layout.row_compilator, null);
-				//lv_list_data.setAdapter(adapter);
-				/*if (checkAddorShow.equals("show")) {
-					AuthorityAdapter adapter = new AuthorityAdapter(CompilatorActivity.this, R.layout.authority_list_row, arrresult);
-					lv_Checklist.setAdapter(adapter);
-				} else if (checkAddorShow.equals("add")) {
-
-					Toast.makeText(CompilatorActivity.this, message, Toast.LENGTH_LONG).show();
-				}*/
+			if (arrresult != null) {
+				 CompilatorAdapter adapter = new
+				 CompilatorAdapter(CompilatorActivity.this, arrresult,
+				 R.layout.row_compilator, null);
+				 lv_list_data.setAdapter(adapter);
+				/*
+				 * if (checkAddorShow.equals("show")) { AuthorityAdapter adapter
+				 * = new AuthorityAdapter(CompilatorActivity.this,
+				 * R.layout.authority_list_row, arrresult);
+				 * lv_Checklist.setAdapter(adapter); } else if
+				 * (checkAddorShow.equals("add")) {
+				 * 
+				 * Toast.makeText(CompilatorActivity.this, message,
+				 * Toast.LENGTH_LONG).show(); }
+				 */
 			}
 		}
 	}
-
 
 	void initview() {
 
@@ -269,9 +292,9 @@ public class CompilatorActivity extends BaseActivity implements OnClickListener 
 		editcorrective = (EditText) findViewById(R.id.editcorrective);
 
 		findViewById(R.id.buttonCheckList).setOnClickListener(this);
-		findViewById(R.id.ll_add_CheckList).setOnClickListener(this);
-		findViewById(R.id.ll_CheckList_list).setOnClickListener(this);
-		
+		// findViewById(R.id.ll_add_CheckList).setOnClickListener(this);
+		// findViewById(R.id.ll_CheckList_list).setOnClickListener(this);
+
 		Date cDate = new Date();
 		String fDate = new SimpleDateFormat("dd-MM-yyyy").format(cDate);
 		editdate.setText(fDate);
@@ -280,8 +303,10 @@ public class CompilatorActivity extends BaseActivity implements OnClickListener 
 	}
 
 	public boolean isNetworkAvailable(Context context) {
-		ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+		ConnectivityManager connectivityManager = (ConnectivityManager) context
+				.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo activeNetworkInfo = connectivityManager
+				.getActiveNetworkInfo();
 		return activeNetworkInfo != null && activeNetworkInfo.isConnected();
 	}
 
@@ -294,6 +319,7 @@ public class CompilatorActivity extends BaseActivity implements OnClickListener 
 		case 2:
 			ll_add.setVisibility(View.GONE);
 			ll_show.setVisibility(View.VISIBLE);
+			new ShowCompilator().execute();
 			break;
 
 		default:
